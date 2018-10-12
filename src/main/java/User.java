@@ -23,11 +23,11 @@ public class User {
         this.friends = new Vector<User>();
     }
 
-    @VisibleForTesting
     private static String createEmailID(String firstpart, String secondpart) {
         String subfirst = firstpart.substring(1);
         return subfirst + "." + secondpart + "@test.ut.ac.ir";
     }
+
 
     private static boolean isEmailValid(String email) {
         String regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(([a-zA-Z\\-0-9]+\\.)*[a-zA-Z]{2,})$";
@@ -48,8 +48,5 @@ public class User {
         return friends.indexOf(friend) != -1;
     }
 
-    public static void main(String[] args) {
-        System.out.println("ADSFASDFASDFA");
-    }
 }
 
