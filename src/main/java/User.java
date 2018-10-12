@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
  * Created by bornarz on 9/28/18.
  */
 public class User {
+
+
     private String firstname;
     private String surname;
     private String email;
@@ -18,9 +20,10 @@ public class User {
         if (!User.isEmailValid(this.email)) {
             throw new IllegalArgumentException();
         }
-        this.friends = new Vector<>();
+        this.friends = new Vector<User>();
     }
 
+    @VisibleForTesting
     private static String createEmailID(String firstpart, String secondpart) {
         String subfirst = firstpart.substring(1);
         return subfirst + "." + secondpart + "@test.ut.ac.ir";
@@ -44,4 +47,9 @@ public class User {
     public boolean isFriendsWith(User friend) {
         return friends.indexOf(friend) != -1;
     }
+
+    public static void main(String[] args) {
+        System.out.println("ADSFASDFASDFA");
+    }
 }
+
