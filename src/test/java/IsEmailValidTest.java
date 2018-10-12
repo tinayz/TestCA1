@@ -37,9 +37,7 @@ public class IsEmailValidTest {
         return Arrays.asList(
                 new Object[][]{
                         {"a@gmail.com", true},
-                        {"c@email.com", true},
                         {null, false},
-                        {"", false},
                         {"#@@@testi", false}, // multple @ s
                         {"#@-.#", false}, // no word
                         {"123@123.123", false}, // just numbers

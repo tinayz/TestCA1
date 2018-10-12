@@ -101,6 +101,4 @@ public class UserFriendsTest {
         field.setAccessible(true);
         return (Vector<User>) field.get(this.user);
     }
-
-
 }
