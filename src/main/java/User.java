@@ -48,5 +48,18 @@ public class User {
         return friends.indexOf(friend) != -1;
     }
 
+    public static void main(String[] args) {
+        User user = new User("shahryar", "s");
+        User tinay = new User("tina", "y");
+        User tinayz = new User("tina", "yz");
+        user.addFriend(tinay);
+        user.addFriend(tinayz);
+        User removed = new User("tina", "y");
+        user.removeFriend(tinay);
+        for(User item : user.friends){
+            System.out.println(String.format("%s %s", item.firstname, item.surname));
+        }
+    }
+
 }
 
