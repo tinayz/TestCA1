@@ -59,7 +59,7 @@ public class IsEmailValidTest {
     public void emailValidationTest() {
         try {
             boolean result = (Boolean) method.invoke(this.user, this.email);
-            Assert.assertTrue("emailValidationTest", result == expected);
+            Assert.assertEquals("emailValidationTest", result, expected);
         } catch (Exception e) {
             if (email == null) {
                 Assert.assertTrue("emailValidationTest null pointer", e.getCause() instanceof NullPointerException);
