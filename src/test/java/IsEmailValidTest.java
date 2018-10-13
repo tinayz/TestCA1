@@ -48,7 +48,8 @@ public class IsEmailValidTest {
                         {"-esm-@gmail.com", false}, //dash characters
                         {"*+/=?^_`{|}~-@gmail.com", false}, //illegal characters
                         {"name@com", false},
-                        {"name@test.a", false}
+                        {"name@test.a", false},
+                        {"info@xn--mgbp1ee38d.xn--mgbab2bd", true}
                 }
         );
     }
