@@ -42,6 +42,7 @@ public class IsEmailValidTest {
                         {"#@-.#", false}, // no word
                         {"123@123.123", false}, // just numbers
                         {"test@", false},
+                        {"withoutAt.com", false},
                         {" t  est  @ gmail .com ", false}, //spacing
                         {"", false},
                         {"esm.famil@x.y.ir", true}, //multi dots

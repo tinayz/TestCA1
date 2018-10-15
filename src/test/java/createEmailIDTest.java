@@ -1,20 +1,14 @@
 import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import java.lang.reflect.Method;
 
 import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.fail;
-import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeNotNull;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assume.*;
 
 @RunWith(Theories.class)
 public class createEmailIDTest {
@@ -44,7 +38,7 @@ public class createEmailIDTest {
     @Theory
     public void testCreateEmailIDHappyTest(String firstPart, String secondPart) {
         assumeNotNull(firstPart, secondPart);
-        assumeFalse(firstPart.equals("") || secondPart.equals(""));
+        assumeFalse(firstPart.equals(""));
         System.out.println(String.format("Testing with %s and %s", firstPart, secondPart));
         String result = null;
         try {
@@ -59,21 +53,37 @@ public class createEmailIDTest {
 
     @Theory
     public void testCreateEmailIDBadTest(String firstPart, String secondPart) {
-        assumeTrue(firstPart == null || secondPart == null || isBlank(firstPart) || isBlank(secondPart));
+        assumeTrue(firstPart != null);
+        assumeTrue(secondPart == null || isBlank(firstPart));
+        boolean exceptionThrown = false;
         System.out.println(String.format("Testing with %s and %s", firstPart, secondPart));
         try {
             this.callTestedMethod(firstPart, secondPart);
         } catch (Exception e) {
-            if (firstPart == null)
-                assertTrue(e.getCause() instanceof NullPointerException);
-            else
-                assertTrue(e.getCause() instanceof StringIndexOutOfBoundsException);
+            exceptionThrown = true;
+            assertTrue(e.getCause() instanceof StringIndexOutOfBoundsException);
         }
+        assertTrue(exceptionThrown);
     }
+
+    @Theory
+    public void firstPartNullTest(String firstPart, String secondPart) {
+        assumeTrue(firstPart == null);
+        boolean exceptionThrown = false;
+        try {
+            this.callTestedMethod(firstPart, secondPart);
+        } catch (Exception e) {
+            exceptionThrown = true;
+            assertTrue(e.getCause() instanceof NullPointerException);
+        }
+        assertTrue(exceptionThrown);
+    }
+
     public String callTestedMethod(String firstPart, String secondPart) throws Exception {
         return (String) method.invoke(this.user, firstPart, secondPart);
     }
-    private boolean isBlank(String string){
+
+    private boolean isBlank(String string) {
         return string.equals("");
     }
 }
